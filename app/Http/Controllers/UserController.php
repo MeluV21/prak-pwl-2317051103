@@ -23,13 +23,20 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function index() {
-        $users = User::all(); 
-        return view('list_user', [
-        'title' => 'Daftar User',
-        'users' => $users
-    ]);
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+            $query->where('name', 'LIKE', "%{$search}%")
+                  ->orWhere('nim', 'LIKE', "%{$search}%");
+        })
+        ->paginate(5); // tampilkan 5 data per halaman
+
+        return view('list_user', compact('users'));
     }
+
 
 
 }
