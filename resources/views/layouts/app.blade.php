@@ -21,21 +21,22 @@
 
          .bg-lilac {
         background-color: #C8A2C8 !important; /* lilac pastel */
-    }
-    .bg-lilac-dark {
-        background-color: #b088b0 !important; /* lilac lebih gelap */
-    }
-    .text-lilac {
-        color: #C8A2C8 !important;
-    }
-    .btn-lilac {
-        background-color: #C8A2C8;
-        color: white;
-    }
-    .btn-lilac:hover {
-        background-color: #b088b0;
-        color: white;
-    }
+        }
+        .bg-lilac-dark {
+            background-color: #b088b0 !important; /* lilac lebih gelap */
+        }
+        .text-lilac {
+            color: #C8A2C8 !important;
+        }
+        .btn-lilac {
+            background-color: #C8A2C8;
+            color: white;
+            border-radius: 20px;
+        }
+        .btn-lilac:hover {
+            background-color: #b088b0;
+            color: white;
+        }
 
     </style>
 </head>
