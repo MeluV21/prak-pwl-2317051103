@@ -1,19 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-lilac shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">📘 PWL Project</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-lilac shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="#">💠 PWL Project</a>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item me-2">
-          <a class="nav-link btn btn-outline-dark rounded-pill px-3 py-1" href="{{ route('matakuliah.create') }}">+ Tambah Mata Kuliah</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-dark rounded-pill px-3 py-1" href="{{ route('matakuliah.index') }}">📋 Daftar Mata Kuliah</a>
-        </li>
-      </ul>
+        <div class="d-flex">
+            {{-- Kalau lagi di halaman USER --}}
+            @if (Request::is('user*'))
+                <a href="{{ route('user.create') }}" 
+                   class="btn btn-light me-2 {{ Request::is('user/create') ? 'active' : '' }}">
+                   + Tambah User
+                </a>
+                <a href="{{ route('user.index') }}" 
+                   class="btn btn-light {{ Request::is('user') ? 'active' : '' }}">
+                   📋 Daftar User
+                </a>
+
+            {{-- Kalau lagi di halaman MATA KULIAH --}}
+            @elseif (Request::is('matakuliah*'))
+                <a href="{{ route('matakuliah.create') }}" 
+                   class="btn btn-light me-2 {{ Request::is('matakuliah/create') ? 'active' : '' }}">
+                   + Tambah Mata Kuliah
+                </a>
+                <a href="{{ route('matakuliah.index') }}" 
+                   class="btn btn-light {{ Request::is('matakuliah') ? 'active' : '' }}">
+                   📚 Daftar Mata Kuliah
+                </a>
+
+            {{-- Default fallback kalau bukan keduanya --}}
+            @else
+                <a href="{{ route('user.index') }}" class="btn btn-light me-2">👥 Daftar User</a>
+                <a href="{{ route('matakuliah.index') }}" class="btn btn-light">📚 Mata Kuliah</a>
+            @endif
+        </div>
     </div>
-  </div>
 </nav>

@@ -1,29 +1,39 @@
-<table class="table table-hover table-striped table-bordered align-middle">
-    <thead class="table-dark text-center">
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
         <tr>
-            <th style="width: 5%">#</th>
-            <th style="width: 25%">Nama</th>
-            <th style="width: 20%">NPM</th>
-            <th style="width: 20%">Kelas</th>
-            <th style="width: 30%">Aksi</th>
+            <th>#</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Kelas</th>
+            <th>Aksi</th>
         </tr>
     </thead>
-    <tbody class="text-center">
+    <tbody>
         @forelse ($users as $user)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td class="fw-bold">{{ $user->name }}</td>
-                <td><span class="badge bg-lilac text-white">{{ $user->nim }}</span></td>
+                <td>{{ $loop->iteration }}</td>
+                <td><strong>{{ $user->name }}</strong></td>
+                <td><span class="badge bg-lilac text-dark">{{ $user->nim }}</span></td>
                 <td>{{ $user->kelas }}</td>
                 <td>
-                    <a href="#" class="btn btn-sm btn-lilac">👁 Lihat</a>
-                    <a href="#" class="btn btn-sm btn-warning">✏ Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger">🗑 Hapus</a>
+                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm rounded-pill">
+                        ✏️ Edit
+                    </a>
+                    <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm rounded-pill"
+                            onclick="return confirm('Yakin ingin menghapus pengguna ini?')">
+                            🗑️ Hapus
+                        </button>
+                    </form>
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="5" class="text-muted">⚠️ Belum ada data pengguna</td>
+                <td colspan="5" class="text-center text-muted py-4">
+                    ⚠️ Belum ada data pengguna
+                </td>
             </tr>
         @endforelse
     </tbody>

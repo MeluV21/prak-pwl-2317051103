@@ -15,22 +15,31 @@
 
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
-                    <tr>
-                        <th>Nama Mata Kuliah</th>
-                        <th>SKS</th>
-                    </tr>
+                <tr>
+                    <th>Nama Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Aksi</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @forelse($matkul as $m)
-                    <tr>
-                        <td>{{ $m->nama_mk }}</td>
-                        <td>{{ $m->sks }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="2" class="text-center text-muted">Belum ada data mata kuliah</td>
-                    </tr>
-                    @endforelse
+                @forelse($matkul as $m)
+                <tr>
+                    <td>{{ $m->nama_mk }}</td>
+                    <td>{{ $m->sks }}</td>
+                    <td>
+                    <a href="{{ route('matakuliah.edit', $m->id) }}" class="btn btn-warning btn-sm rounded-pill">Edit</a>
+                    <form action="{{ route('matakuliah.destroy', $m->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm rounded-pill" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                    </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3" class="text-center">Belum ada data mata kuliah</td>
+                </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>
